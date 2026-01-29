@@ -1,0 +1,309 @@
+<div class="bg-base-200 min-h-screen py-12">
+    <div class="container mx-auto px-6 lg:px-12">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+            <div>
+                <h1 class="text-4xl font-bold font-display mb-2">Admin Dashboard</h1>
+                <p class="text-base-content/60 text-sm">Overview of platform performance and management.</p>
+            </div>
+            <div class="flex gap-4">
+                <button class="btn btn-ghost bg-base-100 border-none shadow-sm rounded-xl px-6">Download Report</button>
+                <button (click)="openSubjectModal('add')"
+                    class="btn btn-primary rounded-xl px-6 shadow-lg shadow-primary/20">+ Add New Course</button>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div role="tablist" class="tabs tabs-boxed mb-8 bg-base-100 p-1 rounded-xl inline-flex">
+            <a role="tab" class="tab rounded-lg" [class.tab-active]="activeTab() === 'dashboard'"
+                (click)="setTab('dashboard')">Dashboard</a>
+            <a role="tab" class="tab rounded-lg" [class.tab-active]="activeTab() === 'subjects'"
+                (click)="setTab('subjects')">Subjects</a>
+            <a role="tab" class="tab rounded-lg" [class.tab-active]="activeTab() === 'faculty'"
+                (click)="setTab('faculty')">Faculty</a>
+            <a role="tab" class="tab rounded-lg" [class.tab-active]="activeTab() === 'users'"
+                (click)="setTab('users')">Users</a>
+        </div>
+
+        <!-- DASHBOARD TAB -->
+        <ng-container *ngIf="activeTab() === 'dashboard'">
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div *ngFor="let stat of stats()" class="card-academic p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary">
+                            <svg *ngIf="stat.icon === 'users'" class="w-6 h-6" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                                </path>
+                            </svg>
+                            <svg *ngIf="stat.icon === 'book'" class="w-6 h-6" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                </path>
+                            </svg>
+                            <svg *ngIf="stat.icon === 'briefcase'" class="w-6 h-6" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <!-- <svg *ngIf="stat.icon === 'dollar'" class="w-6 h-6" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3 1.343 3 3-1.343 3-3 3m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg> -->
+                        </div>
+                        <span
+                            class="text-xs font-black text-secondary bg-secondary/10 px-2 py-1 rounded-lg">{{stat.trend}}</span>
+                    </div>
+                    <div class="text-3xl font-black text-base-content font-display mb-1">{{stat.value}}</div>
+                    <div class="text-sm font-bold text-slate-400 uppercase tracking-widest">{{stat.label}}</div>
+                </div>
+            </div>
+
+            <!-- Management Tables (Dashboard View) -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Recent Enrollments -->
+                <div class="lg:col-span-2 card-academic p-0 overflow-hidden">
+                    <div class="p-8 border-b border-base-200 flex justify-between items-center">
+                        <h3 class="text-xl font-bold font-display">Recent Enrollments</h3>
+                        <button class="btn btn-ghost btn-sm text-primary font-bold">View All</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="table w-full">
+                            <thead>
+                                <tr
+                                    class="bg-base-200/50 text-base-content/60 text-xs uppercase tracking-widest border-none">
+                                    <th class="py-4 pl-8 font-black">Student</th>
+                                    <th class="py-4 font-black">Course</th>
+                                    <th class="py-4 font-black">Date</th>
+                                    <th class="py-4 font-black">Status</th>
+                                    <th class="py-4 pr-8 font-black text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let entry of recentEnrollments()"
+                                    class="hover:bg-base-200/30 transition-colors border-base-200">
+                                    <td class="pl-8 py-5">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                            <span class="font-bold text-base-content">{{entry.student}}</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-5 text-sm font-medium text-base-content/70">{{entry.course}}</td>
+                                    <td class="py-5 text-sm text-base-content/50">{{entry.date}}</td>
+                                    <td class="py-5">
+                                        <div [class.badge-success]="entry.status === 'Completed'"
+                                            [class.badge-warning]="entry.status === 'Pending'"
+                                            [class.badge-info]="entry.status === 'Active'"
+                                            class="badge badge-sm font-bold text-[10px] uppercase py-2">
+                                            {{entry.status}}
+                                        </div>
+                                    </td>
+                                    <td class="pr-8 py-5 text-center">
+                                        <button
+                                            class="btn btn-ghost btn-xs text-base-content/50 hover:text-primary">Edit</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- System Status -->
+                <div class="space-y-8">
+                    <div class="card-academic p-8">
+                        <h3 class="text-lg font-bold mb-6 font-display">System Status</h3>
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-base-content/70">Database</span>
+                                <div class="badge badge-success badge-xs"></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-base-content/70">Storage</span>
+                                <span class="text-xs font-bold text-base-content/40">82% Used</span>
+                            </div>
+                            <div class="w-full bg-base-200 h-2 rounded-full overflow-hidden">
+                                <div class="bg-primary h-full w-4/5"></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-base-content/70">Server Load</span>
+                                <span class="text-xs font-bold text-primary">Normal</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-academic p-8 bg-primary/5 border-primary/10">
+                        <h3 class="text-lg font-bold mb-4 font-display text-primary uppercase tracking-widest text-xs">
+                            Admin Tips</h3>
+                        <p class="text-sm text-base-content/70 leading-relaxed italic">
+                            "Review the monthly revenue report before the next faculty meeting on Friday."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- SUBJECTS TAB -->
+        <ng-container *ngIf="activeTab() === 'subjects'">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold font-display">Manage Subjects</h2>
+                <button (click)="openSubjectModal('add')" class="btn btn-primary rounded-xl">+ Add Subject</button>
+            </div>
+            <div class="card-academic p-0 overflow-hidden">
+                <table class="table w-full">
+                    <thead>
+                        <tr class="bg-base-200/50 text-base-content/60 text-xs uppercase tracking-widest border-none">
+                            <th class="py-4 pl-8">ID</th>
+                            <th>Name</th>
+                            <th>Focus</th>
+                            <th>Faculty</th>
+                            <th class="pr-8 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sub of subjects()" class="hover:bg-base-200/30 border-base-200">
+                            <td class="pl-8 font-mono text-xs opacity-50">#{{sub.id}}</td>
+                            <td class="font-bold">{{sub.name}}</td>
+                            <td><span class="badge badge-sm badge-ghost">{{sub.coreFocus}}</span></td>
+                            <td class="text-sm opacity-70">{{sub.facultyName}}</td>
+                            <td class="pr-8 text-right space-x-2">
+                                <button (click)="openSubjectModal('edit', sub)"
+                                    class="btn btn-xs btn-ghost">Edit</button>
+                                <button (click)="deleteSubject(sub.id)"
+                                    class="btn btn-xs btn-error btn-outline">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </ng-container>
+
+        <!-- FACULTY TAB -->
+        <ng-container *ngIf="activeTab() === 'faculty'">
+            <h2 class="text-3xl font-bold font-display mb-8">Manage Faculty</h2>
+            <div class="card-academic p-0 overflow-hidden">
+                <table class="table w-full">
+                    <thead>
+                        <tr class="bg-base-200/50 text-base-content/60 text-xs uppercase tracking-widest border-none">
+                            <th class="py-4 pl-8">ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th class="pr-8 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let fac of faculties()" class="hover:bg-base-200/30 border-base-200">
+                            <td class="pl-8 font-mono text-xs opacity-50">{{fac.id}}</td>
+                            <td class="font-bold">{{fac.name}}</td>
+                            <td class="text-sm opacity-70">{{fac.email}}</td>
+                            <td>{{fac.department}}</td>
+                            <td class="pr-8 text-right">
+                                <button (click)="deleteFaculty(fac.id)"
+                                    class="btn btn-xs btn-error btn-outline">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </ng-container>
+
+        <!-- USERS TAB -->
+        <ng-container *ngIf="activeTab() === 'users'">
+            <h2 class="text-3xl font-bold font-display mb-8">Manage Users</h2>
+            <div class="card-academic p-0 overflow-hidden">
+                <table class="table w-full">
+                    <thead>
+                        <tr class="bg-base-200/50 text-base-content/60 text-xs uppercase tracking-widest border-none">
+                            <th class="py-4 pl-8">Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Joined</th>
+                            <th class="pr-8 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let u of users()" class="hover:bg-base-200/30 border-base-200">
+                            <td class="pl-8 font-bold">{{u.name}}</td>
+                            <td class="text-sm opacity-70">{{u.uniEmail}}</td>
+                            <td>
+                                <span class="badge badge-sm" [class.badge-primary]="u.role === 'admin'"
+                                    [class.badge-ghost]="u.role !== 'admin'">
+                                    {{u.role || 'user'}}
+                                </span>
+                            </td>
+                            <td class="text-xs opacity-50">{{u.studentId}}</td>
+                            <td class="pr-8 text-right">
+                                <button *ngIf="u.role !== 'admin'" (click)="deleteUser(u.id)"
+                                    class="btn btn-xs btn-error btn-outline">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </ng-container>
+
+        <!-- Subject Modal -->
+        <dialog class="modal" [class.modal-open]="isSubjectModalOpen()">
+            <div class="modal-box w-11/12 max-w-2xl bg-base-100">
+                <h3 class="font-bold text-lg mb-6">{{modalMode() === 'add' ? 'Add New Subject' : 'Edit Subject'}}</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label"><span class="label-text">Subject Name</span></label>
+                        <input type="text" [(ngModel)]="currentSubject.name" class="input input-bordered" />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text">Core Focus</span></label>
+                        <select [(ngModel)]="currentSubject.coreFocus" class="select select-bordered">
+                            <option>Technology</option>
+                            <option>Business</option>
+                            <option>Arts</option>
+                            <option>Science</option>
+                            <option>Music</option>
+                            <option>Sports</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text">Faculty Name</span></label>
+                        <input type="text" [(ngModel)]="currentSubject.facultyName" class="input input-bordered" />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text">Duration (Weeks)</span></label>
+                        <input type="number" [(ngModel)]="currentSubject.duration" class="input input-bordered" />
+                    </div>
+                    <!-- Full width -->
+                    <div class="form-control md:col-span-2">
+                        <label class="label"><span class="label-text">Target Audience</span></label>
+                        <input type="text" [(ngModel)]="currentSubject.targetAudience" class="input input-bordered" />
+                    </div>
+                    <div class="form-control md:col-span-2">
+                        <label class="label"><span class="label-text">Prerequisites</span></label>
+                        <textarea [(ngModel)]="currentSubject.prerequisites"
+                            class="textarea textarea-bordered"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-action">
+                    <button class="btn btn-ghost" (click)="closeSubjectModal()">Cancel</button>
+                    <button class="btn btn-primary" (click)="saveSubject()">Save</button>
+                </div>
+            </div>
+            <div class="modal-backdrop" (click)="closeSubjectModal()"></div>
+        </dialog>
+    </div>
+</div>

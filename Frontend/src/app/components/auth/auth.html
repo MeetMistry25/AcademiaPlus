@@ -1,0 +1,182 @@
+<div class="min-h-[calc(100vh-80px)] flex">
+    <!-- Left Side: Illustration & Branding (Hidden on Mobile) -->
+    <div class="hidden lg:flex lg:w-1/2 auth-gradient relative overflow-hidden items-center justify-center p-12">
+        <div
+            class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl">
+        </div>
+        <div
+            class="absolute bottom-0 right-0 w-96 h-96 bg-accent/20 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl">
+        </div>
+
+        <div class="relative z-10 text-white max-w-md">
+            <div class="mb-12">
+                <div
+                    class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-primary text-3xl font-black shadow-2xl mb-6">
+                    A+</div>
+                <h2 class="text-4xl font-bold font-display mb-4">Start Your Excellence Journey.</h2>
+                <p class="text-white/70 text-lg">Join the most prestigious academic platform for extra-curricular
+                    development.</p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="flex gap-4 items-start bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-sm">
+                    <div class="w-10 h-10 bg-secondary rounded-lg flex-shrink-0 flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Rich Learning Library</h4>
+                        <p class="text-sm text-white/60 text-balance">Access specialized courses and
+                            resources.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 items-start bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-sm">
+                    <div class="w-10 h-10 bg-accent rounded-lg flex-shrink-0 flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Verified Certificates</h4>
+                        <p class="text-sm text-white/60 text-balance">Earn recognized achievements for your professional
+                            portfolio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side: Form -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-6 bg-base-100">
+        <div class="w-full max-w-md animate-in slide-in-from-right duration-500">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-bold font-display mb-2">{{ mode() === 'login' ? 'Welcome Back' : 'Create
+                    Account' }}</h2>
+                <p class="text-base-content/60">
+                    {{ mode() === 'login' ? 'Please enter your details to sign in.' : 'Join Academia Plus today.' }}
+                </p>
+            </div>
+
+            <!-- Role Selector -->
+            <div class="flex p-1 bg-base-200 rounded-2xl mb-8">
+                <button (click)="role.set('student')" [class.bg-white.]="role() === 'student'"
+                    [class.shadow-lg]="role() === 'student'"
+                    class="flex-1 py-2 text-sm font-bold rounded-xl transition-all">Student</button>
+
+                <button (click)="role.set('admin')" [class.bg-white]="role() === 'admin'"
+                    [class.shadow-lg]="role() === 'admin'"
+                    class="flex-1 py-2 text-sm font-bold rounded-xl transition-all">Admin</button>
+
+            </div>
+
+            <!-- Error Message -->
+            <div *ngIf="errorMessage()"
+                [class.alert-error]="errorMessage().toLowerCase().includes('failed') || errorMessage().toLowerCase().includes('not found') || errorMessage().toLowerCase().includes('wrong')"
+                [class.alert-success]="errorMessage().toLowerCase().includes('successful')"
+                class="alert mb-6 shadow-sm py-3 rounded-xl border-none font-bold text-sm">
+                <span>{{ errorMessage() }}</span>
+            </div>
+
+            <form (ngSubmit)="onSubmit()" class="space-y-5">
+                <div *ngIf="mode() === 'signup' && role() === 'student'" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-bold">Full Name</span></label>
+                        <input type="text" [(ngModel)]="formData.name" name="name"
+                            class="input input-bordered h-14 bg-base-200/50 border-slate-100 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all w-full"
+                            required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-bold">Phone Number</span></label>
+                        <input type="tel" [(ngModel)]="formData.phoneNumber" name="phoneNumber"
+                            class="input input-bordered h-14 bg-base-200/50 border-slate-100 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all w-full"
+                            required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-bold">Student ID</span></label>
+                        <input type="text" [(ngModel)]="formData.studentId" name="studentId"
+                            class="input input-bordered h-14 bg-base-200/50 border-slate-100 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all w-full"
+                            required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text font-bold">Branch</span></label>
+                        <input type="text" [(ngModel)]="formData.branch" name="branch"
+                            class="input input-bordered h-14 bg-base-200/50 border-slate-100 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all w-full"
+                            required />
+                    </div>
+                </div>
+
+                <div *ngIf="mode() === 'login' || role() === 'student'" class="form-control">
+                    <label class="label"><span class="label-text font-bold">Email Address</span></label>
+                    <input type="email" [(ngModel)]="formData.email" name="email"
+                        class="input input-bordered h-14 bg-base-200/50 border-slate-100 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all w-full"
+                        required />
+                </div>
+
+                <div *ngIf="mode() === 'signup' && role() === 'student'" class="form-control">
+                    <label class="label"><span class="label-text font-bold">A Bit About You (Bio)</span></label>
+                    <textarea [(ngModel)]="formData.bio" name="bio"
+                        class="textarea textarea-bordered bg-base-200/50 border-slate-100 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all w-full h-24"
+                        required></textarea>
+                </div>
+                <!-- Info for non-student signup -->
+                <div *ngIf="mode() === 'signup' && role() !== 'student'"
+                    class="p-6 bg-amber-50 rounded-2xl border border-amber-100 text-amber-800 text-sm font-medium">
+                    Faculty and Admin accounts are managed by the institution. Please contact the IT department for
+                    registration.
+                </div>
+
+
+                <div *ngIf="mode() === 'login' || role() === 'student'" class="form-control">
+                    <label class="label">
+                        <span class="label-text font-bold">Password</span>
+                        <a *ngIf="mode() === 'login'"
+                            class="label-text-alt text-primary font-bold cursor-pointer">Forgot?</a>
+                    </label>
+                    <div class="relative">
+                        <input [type]="showPassword() ? 'text' : 'password'" [(ngModel)]="formData.password"
+                            name="password"
+                            class="input input-bordered h-14 bg-base-200/50 border-slate-100 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all w-full pr-12"
+                            required />
+                        <button type="button" (click)="showPassword.set(!showPassword())"
+                            class="absolute inset-y-0 right-0 px-4 flex items-center text-slate-400 hover:text-primary transition-colors">
+                            <svg *ngIf="!showPassword()" class="w-5 h-5" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                </path>
+                            </svg>
+                            <svg *ngIf="showPassword()" class="w-5 h-5" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button *ngIf="mode() === 'login' || role() === 'student'" type="submit" [disabled]="isLoading()"
+                    class="btn btn-primary h-14 w-full rounded-xl text-lg shadow-xl shadow-primary/20 mt-4">
+                    <span *ngIf="isLoading()" class="loading loading-spinner"></span>
+                    {{ mode() === 'login' ? 'Sign In' : 'Create Account' }}
+                </button>
+
+
+                <p class="text-center text-sm font-medium text-slate-500 mt-10">
+                    {{ mode() === 'login' ? "Don't have an account?" : "Already have an account?" }}
+                    <a (click)="toggleMode()"
+                        class="text-primary font-bold cursor-pointer hover:underline underline-offset-4 ml-1">
+                        {{ mode() === 'login' ? 'Sign up free' : 'Log in here' }}
+                    </a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

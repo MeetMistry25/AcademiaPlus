@@ -1,0 +1,20 @@
+.auth-gradient {
+    background: #1e3a8a;
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}

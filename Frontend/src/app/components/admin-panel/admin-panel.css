@@ -1,0 +1,13 @@
+/* Admin Panel Styles */
+.table :where(thead, tfoot) {
+    background-color: transparent;
+}
+
+.table tr {
+    border-bottom: 1px solid #f8fafc;
+    /* Roughly slate-50 */
+}
+
+.table td {
+    vertical-align: middle;
+}

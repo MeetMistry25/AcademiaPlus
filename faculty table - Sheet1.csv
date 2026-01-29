@@ -1,0 +1,29 @@
+id,name,email,passwordHash,phoneNumber,department,designation,experience
+F201,Dr. Ritesh Kapoor,ritesh.kapoor@techuniv.edu,8jK2pL0mN4qO6rP8sT0uV2wX,9812345678,Computer Science,Professor,24
+F202,Prof. Anjali Menon,anjali.menon@techuniv.edu,A1bC3dE5fG7hI9jK1lM3nO5pQ,9987654321,Electrical Engineering,Head of Department (HOD),26
+F203,Ms. Suresh Verma,suresh.verma@techuniv.edu,Z9xY7vW5uT3rQ1pS9oN7mK5lJ,9765432109,Mechanical Engineering,Associate Professor,14
+F204,Dr. Priya Singh,priya.singh@techuniv.edu,P2kL9s8mQ4yR7tZ1aW3xV5bN,9654321098,Civil Engineering,Assistant Professor,7
+F205,Prof. Vishal Shah,vishal.shah@techuniv.edu,T4uY6iO8pA2sD0fG5hJ7kL9mX,9543210987,Electronics & Communication,Professor,20
+F206,Mr. Rohan Bhatia,rohan.bhatia@techuniv.edu,B1nC3vM5xZ7aQ9wE0rT2yU4iO,9432109876,Computer Science,Senior Lecturer,5
+F207,Dr. Kavita Reddy,kavita.reddy@techuniv.edu,V3eC5xZ7aL9kS2mD4fG6hJ8tY,9321098765,Humanities and Management,Associate Professor,17
+F208,Prof. Dheeraj Gupta,dheeraj.gupta@techuniv.edu,Q5wE7rT9yU1iO3pA5sD7fG9hJ,9210987654,Mathematics,Professor,23
+F209,Ms. Neeti Das,neeti.das@techuniv.edu,X0yZ2aB4cE6dF8gH0jK2lM4nP,9109876543,Civil Engineering,Lecturer,4
+F210,Dr. Farhan Khan,farhan.khan@techuniv.edu,A1bC3dE5fG7hI9jK1lM3nO5pQ,9098765432,Electrical Engineering,Assistant Professor,11
+F211,Prof. Swati Puri,swati.puri@techuniv.edu,Z9xY7vW5uT3rQ1pS9oN7mK5lJ,8987654321,Mechanical Engineering,Professor,25
+F212,Mr. Manish Jain,manish.jain@techuniv.edu,P2kL9s8mQ4yR7tZ1aW3xV5bN,8876543210,Robotics,Research Fellow,3
+F213,Dr. Leela Bose,leela.bose@techuniv.edu,T4uY6iO8pA2sD0fG5hJ7kL9mX,8765432109,Physics,Associate Professor,16
+F214,Prof. Karan Iyer,karan.iyer@techuniv.edu,B1nC3vM5xZ7aQ9wE0rT2yU4iO,8654321098,Aerospace Engineering,Professor,19
+F215,Ms. Disha Patel,disha.patel@techuniv.edu,V3eC5xZ7aL9kS2mD4fG6hJ8tY,8543210987,Computer Science,Assistant Professor,9
+F216,Dr. Vivek Sharma,vivek.sharma@techuniv.edu,Q5wE7rT9yU1iO3pA5sD7fG9hJ,8432109876,Cybersecurity,Head of Department (HOD),22
+F217,Prof. Uma Devi,uma.devi@techuniv.edu,X0yZ2aB4cE6dF8gH0jK2lM4nP,8321098765,Mechanical Engineering,Senior Lecturer,6
+F218,Mr. Chetan Rao,chetan.rao@techuniv.edu,A1bC3dE5fG7hI9jK1lM3nO5pQ,8210987654,Electrical Engineering,Assistant Professor,10
+F219,Dr. Sandeep Ghosh,sandeep.ghosh@techuniv.edu,Z9xY7vW5uT3rQ1pS9oN7mK5lJ,8109876543,Electronics & Communication,Associate Professor,15
+F220,Prof. Amara Saini,amara.saini@techuniv.edu,P2kL9s8mQ4yR7tZ1aW3xV5bN,8098765432,Humanities and Management,Professor,21
+F221,Ms. Tarunima Pal,tarunima.pal@techuniv.edu,T4uY6iO8pA2sD0fG5hJ7kL9mX,7987654321,Computer Science,Assistant Professor,8
+F222,Dr. Jitendra Yadav,jitendra.yadav@techuniv.edu,B1nC3vM5xZ7aQ9wE0rT2yU4iO,7876543210,Civil Engineering,Associate Professor,13
+F223,Prof. Chanchal Nair,chanchal.nair@techuniv.edu,V3eC5xZ7aL9kS2mD4fG6hJ8tY,7765432109,Mathematics,Senior Lecturer,12
+F224,Mr. Amit Kulkarni,amit.kulkarni@techuniv.edu,Q5wE7rT9yU1iO3pA5sD7fG9hJ,7654321098,Electrical Engineering,Research Fellow,4
+F225,Dr. Gayatri Dixit,gayatri.dixit@techuniv.edu,X0yZ2aB4cE6dF8gH0jK2lM4nP,7543210987,Aerospace Engineering,Professor,23
+F226,Prof. Ravi Shankar,ravi.shankar@techuniv.edu,A1bC3dE5fG7hI9jK1lM3nO5pQ,7432109876,Mechanical Engineering,Associate Professor,18
+F227,Ms. Lakshmi Latha,lakshmi.latha@techuniv.edu,Z9xY7vW5uT3rQ1pS9oN7mK5lJ,7321098765,Robotics,Lecturer,6
+F228,Dr. Madan Mohan,madan.mohan@techuniv.edu,P2kL9s8mQ4yR7tZ1aW3xV5bN,7210987654,Cybersecurity,Assistant Professor,10

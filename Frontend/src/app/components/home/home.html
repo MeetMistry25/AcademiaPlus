@@ -1,0 +1,250 @@
+<div class="overflow-x-hidden">
+    <!-- Hero Section -->
+    <section class="relative bg-base-100 py-16 lg:py-24 overflow-hidden">
+        <!-- Decorative Shapes -->
+        <div class="absolute top-0 right-0 -translate-y-12 translate-x-12 w-96 h-96 bg-primary/5 rounded-full blur-3xl">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 translate-y-24 -translate-x-24 w-80 h-80 bg-secondary/10 rounded-full blur-3xl">
+        </div>
+
+        <div class="container mx-auto px-6 lg:px-12 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm mb-8 border border-primary/20">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                        </span>
+                        ADMISSIONS OPEN FOR 2026
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-bold leading-[1.1] mb-8 font-display">
+                        Elevate Your <br />
+                        <span class="text-primary italic">Education</span> Beyond <br />
+                        The Classroom.
+                    </h1>
+                    <p class="text-lg text-base-content/60 mb-10 max-w-lg leading-relaxed">
+                        Join 1,000+ students mastering extracurricular skills through expert-led courses designed for
+                        the modern world.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a routerLink="/courses"
+                            class="btn btn-primary btn-lg px-10 rounded-2xl shadow-xl shadow-primary/30">
+                            Explore Courses
+                        </a>
+                        <a routerLink="/login" class="btn btn-outline btn-lg px-10 rounded-2xl border-slate-200">
+                            Join for Free
+                        </a>
+                    </div>
+
+                    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <div *ngFor="let stat of stats" class="flex flex-col">
+                            <span class="text-3xl font-bold text-base-content font-display">{{stat.value}}</span>
+                            <span class="text-sm text-base-content/50 font-medium">{{stat.label}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 relative">
+                    <div
+                        class="relative z-10 rounded-3xl overflow-hidden shadow-2xl skew-y-1 hover:skew-y-0 transition-transform duration-700">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop"
+                            alt="Students Collaboration" class="w-full object-cover aspect-video" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+                    </div>
+
+                    <!-- Floating UI Cards -->
+                    <div
+                        class="absolute -bottom-10 -left-10 bg-base-100 p-6 rounded-2xl shadow-2xl z-20 hidden md:block animate-bounce-slow">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-bold text-base-content">Verified Instructors</div>
+                                <!-- <div class="text-xs text-slate-400">Top Global Faculty</div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="absolute -top-10 -right-10 bg-base-100 p-6 rounded-2xl shadow-2xl z-20 hidden md:block animate-float">
+                        <div class="flex items-center gap-4">
+                            <div class="avatar-group -space-x-4 rtl:space-x-reverse">
+                                <div
+                                    class="avatar border-2 border-base-100 w-10 bg-primary/10 flex items-center justify-center rounded-full text-primary">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div
+                                    class="avatar border-2 border-base-100 w-10 bg-secondary/10 flex items-center justify-center rounded-full text-secondary">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div
+                                    class="avatar border-2 border-base-100 w-10 bg-accent/10 flex items-center justify-center rounded-full text-accent">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="text-xs font-bold text-base-content">1k+ Active Learners</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Courses -->
+    <section class="py-24 bg-base-200">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <h2 class="text-4xl font-bold mb-4 font-display">Featured Courses</h2>
+                    <p class="text-base-content/60 max-w-md">Our hand-picked courses designed to give you an edge in the
+                        competitive landscape.</p>
+                </div>
+                <a routerLink="/courses" class="btn btn-ghost text-primary font-bold gap-2 group">
+                    View all courses
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div *ngFor="let course of featuredCourses()" class="card-academic group overflow-hidden">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4 font-display group-hover:text-primary transition-colors">
+                            {{course.name}}
+                        </h3>
+                        <div
+                            class="badge badge-secondary badge-outline font-bold text-[10px] uppercase tracking-widest mb-4">
+                            Free Course</div>
+
+                        <div class="flex items-center justify-between mt-8 pt-6 border-t border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <div class="avatar">
+                                    <div
+                                        class="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 ring-opacity-10">
+                                        <div
+                                            class="w-full h-full flex items-center justify-center bg-primary/5 text-primary">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-slate-700">{{course.facultyName}}</span>
+                            </div>
+                            <a [routerLink]="['/courses', course.id]"
+                                class="btn btn-circle btn-primary btn-sm shadow-lg shadow-primary/20 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <!-- <section class="py-24 bg-base-100">
+        <div class="container mx-auto px-6 lg:px-12 text-center">
+            <h2 class="text-4xl font-bold mb-16 font-display">Major Departments</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <div *ngFor="let cat of ['Arts', 'Science', 'Commerce', 'Tech', 'Music', 'Sports']"
+                    class="group p-8 bg-base-200 rounded-3xl hover:bg-primary transition-all duration-500 cursor-pointer">
+                    <div
+                        class="w-16 h-16 bg-white rounded-2xl mx-auto mb-6 flex items-center justify-center text-primary group-hover:scale-110 transition-transform shadow-sm">
+                        <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-slate-800 group-hover:text-white transition-colors">{{cat}}</span>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- CTA Section -->
+    <section class="py-24 container mx-auto px-6" *ngIf="!isLoggedIn()">
+        <div class="bg-primary rounded-[3rem] p-12 lg:p-24 relative overflow-hidden text-center lg:text-left">
+            <div
+                class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl">
+            </div>
+            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 text-white">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl lg:text-6xl font-bold mb-6 font-display">Ready to start your learning journey?
+                    </h2>
+                    <p class="text-lg opacity-80 mb-0">Join our community today and get access to exclusive workshops
+                        and events.</p>
+                </div>
+                <div class="flex gap-4">
+                    <button
+                        class="btn btn-white btn-lg px-12 rounded-2xl bg-white text-primary hover:bg-slate-100 border-none">Get
+                        Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes bounce-slow {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-bounce-slow {
+        animation: bounce-slow 4s ease-in-out infinite;
+    }
+</style>

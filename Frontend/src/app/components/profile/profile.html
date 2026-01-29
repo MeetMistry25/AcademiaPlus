@@ -1,0 +1,208 @@
+<div class="bg-base-200 min-h-screen py-12">
+    <div class="container mx-auto px-6 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- Sidebar / Profile Info -->
+            <aside class="lg:col-span-4 space-y-8">
+                <div class="card-academic p-8 text-center flex flex-col items-center">
+                    <div class="avatar mb-6">
+                        <div
+                            class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-4 bg-primary/10 flex items-center justify-center text-primary">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 class="text-2xl font-bold font-display">{{student().name}}</h2>
+                    <p class="text-slate-400 text-sm mb-6">{{student().email}}</p>
+
+                    <!-- <div class="grid grid-cols-2 w-full gap-4 pt-6 border-t border-slate-50">
+                        <div class="text-center">
+                            <div class="text-xl font-black text-slate-800">{{student().credits}}</div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Credits</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl font-black text-slate-800">{{student().joined}}</div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Since</div>
+                        </div>
+                    </div> -->
+
+                    <div class="flex flex-col gap-3 mt-8">
+                        <button *ngIf="!isEditing()" (click)="toggleEdit()"
+                            class="btn btn-primary btn-block rounded-xl">Edit Profile</button>
+                        <ng-container *ngIf="isEditing()">
+                            <button (click)="saveProfile()" class="btn btn-primary btn-block rounded-xl">Save
+                                Changes</button>
+                            <button (click)="cancelEdit()"
+                                class="btn btn-ghost btn-block rounded-xl text-slate-500">Cancel</button>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <!-- <div class="card-academic p-8">
+                    <h3 class="text-lg font-bold mb-6 font-display">Notifications</h3>
+                    <div class="space-y-4">
+                        <div *ngFor="let note of notifications"
+                            class="p-4 rounded-xl border border-slate-100 flex gap-4"
+                            [class.bg-primary/5]="note.type === 'alert'">
+                            <div class="w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center"
+                                [class.bg-primary/10]="note.type === 'alert'"
+                                [class.bg-blue-100]="note.type === 'info'">
+                                <svg *ngIf="note.type === 'alert'" class="w-5 h-5 text-primary" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                    </path>
+                                </svg>
+                                <svg *ngIf="note.type === 'info'" class="w-5 h-5 text-blue-500" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">{{note.title}}</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">{{note.message}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Profile Details -->
+                <section class="card-academic p-8">
+                    <h3 class="text-xl font-bold font-display mb-6">Personal Information</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Name -->
+                        <div class="form-control">
+                            <label class="label"><span class="label-text font-bold text-slate-500">Full
+                                    Name</span></label>
+                            <div *ngIf="!isEditing()" class="font-bold text-base-content text-lg">{{student().name}}
+                            </div>
+                            <input *ngIf="isEditing()" type="text" [(ngModel)]="editData.name"
+                                class="input input-bordered w-full rounded-lg" />
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-control">
+                            <label class="label"><span class="label-text font-bold text-slate-500">Email
+                                    Address</span></label>
+                            <div class="font-bold text-base-content text-lg">{{student().email}}</div>
+                            <div *ngIf="isEditing()" class="text-xs text-slate-400 mt-1">Email cannot be changed.</div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="form-control">
+                            <label class="label"><span class="label-text font-bold text-slate-500">Phone
+                                    Number</span></label>
+                            <div *ngIf="!isEditing()" class="font-bold text-base-content text-lg">{{student().phone ||
+                                '-'}}</div>
+                            <input *ngIf="isEditing()" type="tel" [(ngModel)]="editData.phone"
+                                class="input input-bordered w-full rounded-lg" placeholder="+1 234 567 8900" />
+                        </div>
+
+                        <!-- Student ID -->
+                        <div class="form-control">
+                            <label class="label"><span class="label-text font-bold text-slate-500">Student
+                                    ID</span></label>
+                            <div *ngIf="!isEditing()" class="font-bold text-base-content text-lg">{{student().studentId
+                                ||
+                                '-'}}</div>
+                            <input *ngIf="isEditing()" type="text" [(ngModel)]="editData.studentId"
+                                class="input input-bordered w-full rounded-lg" />
+                        </div>
+
+                        <!-- Major/Branch -->
+                        <div class="form-control">
+                            <label class="label"><span class="label-text font-bold text-slate-500">Department /
+                                    Major</span></label>
+                            <div *ngIf="!isEditing()" class="font-bold text-base-content text-lg">{{student().major ||
+                                '-'}}</div>
+                            <input *ngIf="isEditing()" type="text" [(ngModel)]="editData.major"
+                                class="input input-bordered w-full rounded-lg" />
+                        </div>
+
+                        <!-- Bio -->
+                        <div class="form-control md:col-span-2">
+                            <label class="label"><span class="label-text font-bold text-slate-500">Bio</span></label>
+                            <div *ngIf="!isEditing()" class="text-base-content/80 leading-relaxed">{{student().bio ||
+                                'No bio
+                                provided.'}}</div>
+                            <textarea *ngIf="isEditing()" [(ngModel)]="editData.bio"
+                                class="textarea textarea-bordered w-full h-24 rounded-xl"
+                                placeholder="Tell us about yourself..."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+
+            </aside>
+
+            <!-- Main Activity -->
+            <main class="lg:col-span-8 space-y-10">
+                <!-- Welcome Section -->
+                <div>
+                    <h1 class="text-4xl font-bold font-display mb-2">Hello, {{student().name.split(' ')[0]}}! 👋</h1>
+                </div>
+
+
+                <!-- Enrolled Courses -->
+                <section>
+                    <div class="flex justify-between items-center mb-8">
+                        <h3 class="text-xl font-bold font-display">Enrolled Courses</h3>
+                        <a routerLink="/courses" class="text-sm font-bold text-primary hover:underline">Browse More</a>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div *ngFor="let course of enrolledCourses()" class="card-academic group">
+                            <div class="flex flex-col h-full">
+                                <div class="p-6">
+                                    <h4 class="text-lg font-bold mb-1 font-display">{{course.title}}</h4>
+                                    <p class="text-xs text-slate-400 mb-6 font-medium">By {{course.faculty}}</p>
+
+                                    <!-- Progress Removed -->
+                                    <div class="mb-6"></div>
+
+                                    <div
+                                        class="flex items-center gap-2 p-3 bg-base-200 rounded-xl text-xs font-bold text-slate-500">
+                                        <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                        Next: {{course.nextClass}}
+                                    </div>
+
+                                    <button (click)="unenroll(course.courseId)"
+                                        class="btn btn-outline btn-error btn-block mt-6 rounded-xl hover:text-white transition-all">
+                                        Unenroll
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recommended for you -->
+                <section *ngIf="enrolledCourses().length === 0"
+                    class="bg-base-100 p-10 rounded-3xl shadow-sm border border-base-200 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8">
+                        <div
+                            class="w-20 h-20 bg-secondary/5 rounded-full flex items-center justify-center text-secondary rotate-12">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative z-10 max-w-lg">
+                        <h3 class="text-2xl font-bold font-display mb-4">Master New Skills</h3>
+                        <p class="text-slate-400 mb-8 leading-relaxed">Based on your interest in Computer Science, we
+                            recommend the <strong>Cloud Infrastructure Mastery</strong> course starting next week.</p>
+                        <button routerLink="/courses"
+                            class="btn btn-secondary px-8 rounded-xl shadow-lg shadow-secondary/20">Learn
+                            More</button>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+<div class="navbar px-4 md:px-10 h-20">
+    <div class="navbar-start">
+        <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                </svg>
+            </div>
+            <ul tabindex="0"
+                class="menu menu-sm dropdown-content mt-3 z-[1] p-4 shadow-xl bg-base-100 rounded-2xl w-64 border border-slate-100">
+                <li><a routerLink="/" routerLinkActive="text-primary font-bold">Home</a></li>
+                <li><a routerLink="/courses" routerLinkActive="text-primary font-bold">Courses</a></li>
+                <li><a routerLink="/faculty" routerLinkActive="text-primary font-bold">Faculty</a></li>
+                <ng-container *ngIf="role() === 'admin'">
+                    <li class="menu-title mt-2">Admin</li>
+                    <li><a routerLink="/admin">Dashboard</a></li>
+                </ng-container>
+            </ul>
+        </div>
+
+        <a routerLink="/" class="flex items-center gap-3 group">
+            <!-- <img src="/A+.ico" alt="Academia+" class="h-8 w-8 transition-transform group-hover:scale-110"> -->
+            <span class="text-2xl font-bold font-display tracking-tight hidden sm:block">Academia<span
+                    class="text-primary">+</span></span>
+        </a>
+    </div>
+
+    <div class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1 gap-2">
+            <li>
+                <a routerLink="/" routerLinkActive="bg-primary/10 text-primary font-semibold"
+                    [routerLinkActiveOptions]="{exact: true}" class="rounded-xl px-5">Home</a>
+            </li>
+            <li>
+                <a routerLink="/courses" routerLinkActive="bg-primary/10 text-primary font-semibold"
+                    class="rounded-xl px-5">Courses</a>
+            </li>
+            <li>
+                <a routerLink="/faculty" routerLinkActive="bg-primary/10 text-primary font-semibold"
+                    class="rounded-xl px-5">Faculty</a>
+            </li>
+
+            <!-- Role Based Conditional Links -->
+            <li *ngIf="role() === 'student'">
+                <a routerLink="/mylearning" routerLinkActive="bg-primary/10 text-primary font-semibold"
+                    class="rounded-xl px-5">My Learning</a>
+            </li>
+            <li *ngIf="role() === 'faculty'">
+                <a routerLink="/faculty/dashboard" routerLinkActive="bg-primary/10 text-primary font-semibold"
+                    class="rounded-xl px-5">Manage Courses</a>
+            </li>
+            <li *ngIf="role() === 'admin'">
+                <a routerLink="/admin" routerLinkActive="bg-primary/10 text-primary font-semibold"
+                    class="rounded-xl px-5">Admin Panel</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="navbar-end gap-3">
+        <!-- Search Trigger (Desktop) -->
+        <!-- <div
+            class="hidden md:flex items-center bg-base-200 rounded-full px-4 py-2 border border-slate-200 focus-within:border-primary/50 focus-within:ring-4 focus-within:ring-primary/10 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-50" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" placeholder="Search courses..."
+                class="bg-transparent border-none focus:outline-none text-sm ml-2 w-32 xl:w-48" />
+        </div> -->
+
+        <!-- Theme Toggle -->
+        <label class="swap swap-rotate btn btn-ghost btn-circle">
+            <input type="checkbox" (change)="toggleTheme()" [checked]="currentTheme() === 'dark'" />
+
+            <!-- Sun Icon (Outline) -->
+            <svg class="swap-on h-6 w-6 text-warning" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0Z" />
+            </svg>
+
+            <!-- Moon Icon (Outline) -->
+            <svg class="swap-off h-6 w-6 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M21.752 15.002A9.718 9.718 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+            </svg>
+        </label>
+
+        <!-- Notification Bell -->
+        <button class="btn btn-ghost btn-circle">
+            <div class="indicator">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                <span class="badge badge-xs badge-accent indicator-item"></span>
+            </div>
+        </button>
+
+        <!-- Auth Section -->
+        <ng-container *ngIf="!role(); else userMenu">
+            <a routerLink="/login" class="btn btn-ghost btn-sm font-semibold rounded-lg hidden sm:inline-flex">Login</a>
+            <a routerLink="/login" [queryParams]="{mode: 'signup'}"
+                class="btn btn-primary btn-sm px-6 rounded-lg shadow-lg shadow-primary/20">Sign Up</a>
+        </ng-container>
+
+        <ng-template #userMenu>
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button"
+                    class="btn btn-ghost btn-circle avatar border-2 border-primary/20 p-0.5">
+                    <div class="w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <ul tabindex="0"
+                    class="mt-3 z-[1] p-2 shadow-2xl menu menu-sm dropdown-content bg-base-100 rounded-2xl w-52 border border-slate-100">
+                    <!-- <li class="px-4 py-2">
+                        <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Signed in as</span>
+                        <div class="font-bold truncate text-base-content"></div>
+                    </li> -->
+                    <!-- <div class="divider my-0"></div> -->
+                    <li><a routerLink="/profile"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg> Profile</a></li>
+                    <li><a routerLink="settings"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                </path>
+                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg> Settings</a></li>
+                    <li class="text-error"><a (click)="logout()"><svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                </path>
+                            </svg> Logout</a></li>
+                </ul>
+            </div>
+        </ng-template>
+    </div>
+</div>

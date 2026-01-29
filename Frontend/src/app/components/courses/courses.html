@@ -1,0 +1,102 @@
+<div class="bg-base-200 min-h-screen py-12">
+    <div class="container mx-auto px-6 lg:px-12">
+        <!-- Header & Search -->
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+            <div>
+                <h1 class="text-4xl font-bold font-display mb-2">Explore Courses</h1>
+                <p class="text-base-content/60">Discover 50+ specialized courses from verified faculty.</p>
+            </div>
+
+            <div class="flex w-full md:w-auto gap-4">
+                <div class="relative flex-grow md:w-80">
+                    <input type="text" [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)"
+                        placeholder="Search by course or faculty..."
+                        class="input input-bordered w-full h-14 bg-base-100 border-none shadow-sm rounded-2xl pl-12 focus:ring-4 focus:ring-primary/10 transition-all" />
+                    <svg class="w-6 h-6 absolute left-4 top-4 text-slate-300" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <button
+                    class="btn btn-square h-14 w-14 bg-base-100 border-none shadow-sm rounded-2xl text-slate-500 hover:text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Categories Filter -->
+        <div class="flex gap-2 overflow-x-auto pb-8 no-scrollbar">
+            <button *ngFor="let cat of categories" (click)="selectedCategory.set(cat)"
+                [class.btn-primary]="selectedCategory() === cat" [class.bg-base-100]="selectedCategory() !== cat"
+                [class.text-slate-500]="selectedCategory() !== cat"
+                class="btn btn-sm h-12 px-6 rounded-xl border-none shadow-sm transition-all whitespace-nowrap">
+                {{cat}}
+            </button>
+
+            <!-- Results Count -->
+            <div class="ml-auto flex items-center text-sm font-bold text-slate-400 italic px-4 whitespace-nowrap">
+                Showing {{filteredCourses().length}} total results
+            </div>
+        </div>
+
+        <!-- Course Grid -->
+        <div *ngIf="filteredCourses().length > 0; else emptyState"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div *ngFor="let course of filteredCourses()" class="card-academic flex flex-col group h-full">
+
+                <div class="p-6 flex flex-col flex-grow">
+                    <!-- <div class="flex justify-between items-start mb-4">
+                        <div
+                            class="badge badge-outline border-slate-200 text-slate-400 text-[10px] font-bold uppercase tracking-tighter">
+                            {{course.coreFocus}}</div>
+                    </div> -->
+
+                    <h3
+                        class="text-xl font-bold mb-2 font-display line-clamp-2 group-hover:text-primary transition-colors">
+                        {{course.name}}</h3>
+
+                    <div class="flex items-center gap-2 mb-4">
+                        <span
+                            class="badge badge-sm bg-primary/10 text-primary border-none text-[10px] font-bold uppercase">{{course.skillType}}</span>
+                        <span class="text-slate-300 text-xs">|</span>
+                        <span class="text-slate-400 text-xs font-medium">{{course.location}}</span>
+                    </div>
+
+                    <p class="text-slate-400 text-sm mb-6 flex items-center gap-2">
+                        <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+                        By {{course.facultyName}}
+                    </p>
+
+                    <div class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-xs text-slate-400 font-medium">Status</span>
+                            <span
+                                class="text-2xl font-black text-secondary font-display uppercase tracking-widest">Free</span>
+                        </div>
+                        <a [routerLink]="['/courses', course.id]" class="btn btn-primary rounded-xl px-6">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <ng-template #emptyState>
+            <div class="flex flex-col items-center justify-center py-24 text-center">
+                <div class="w-64 h-64 bg-base-100 rounded-full flex items-center justify-center mb-8">
+                    <svg class="w-24 h-24 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">No courses found</h3>
+                <p class="text-slate-400 max-w-sm">Try adjusting your search or category filters to find what you're
+                    looking for.</p>
+                <button (click)="searchQuery.set(''); selectedCategory.set('All')"
+                    class="btn btn-ghost mt-6 text-primary font-bold">Clear all filters</button>
+            </div>
+        </ng-template>
+    </div>
+</div>

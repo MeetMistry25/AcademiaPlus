@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+    --color-primary: #1e3a8a;
+    --color-secondary: #0d9488;
+    --color-accent: #f59e0b;
+    --color-neutral: #3d4451;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.glass-nav {
+    backdrop-filter: blur(12px);
+    background-color: color-mix(in srgb, var(--color-base-100) 80%, transparent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--color-base-200);
+}
+
+.auth-gradient {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+}
+
+.card-academic {
+    background-color: var(--color-base-100);
+    border-radius: 1rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-base-200);
+}
+
+/* Accessibility Optimizations */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+}
+
+/* Font Size Scaling is handled via html { font-size: X% } which Tailwind respects via REM */

@@ -1,0 +1,56 @@
+<div class="bg-base-200 min-h-screen py-12">
+    <div class="container mx-auto px-6 lg:px-12">
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-4xl font-bold font-display text-base-content mb-2">My Learning</h1>
+                <p class="text-base-content/60">Track your progress and continue learning.</p>
+            </div>
+            <a routerLink="/courses" class="btn btn-primary rounded-xl">Browse Courses</a>
+        </div>
+
+        <div *ngIf="enrolledCourses().length === 0" class="text-center py-24">
+            <div class="bg-base-100 p-12 rounded-3xl shadow-sm inline-block max-w-lg">
+                <div
+                    class="w-20 h-20 bg-base-200 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-400">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-base-content mb-2">No active enrollments</h3>
+                <p class="text-base-content/60 mb-8">You haven't enrolled in any courses yet. Explore our catalog to get
+                    started.</p>
+                <a routerLink="/courses" class="btn btn-outline border-slate-200 w-full rounded-xl">Find a Course</a>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div *ngFor="let course of enrolledCourses()" class="card-academic group h-full">
+                <div
+                    class="flex flex-col h-full bg-base-100 rounded-3xl p-6 shadow-sm border border-base-200 hover:shadow-md transition-all">
+                    <h4 class="text-lg font-bold mb-1 font-display truncate">{{course.title}}</h4>
+                    <p class="text-xs text-base-content/60 mb-6 font-medium">By {{course.faculty}}</p>
+
+                    <div class="mt-auto space-y-4">
+                        <!-- Progress Removed -->
+                        <div class="mb-4"></div>
+
+                        <div
+                            class="flex items-center gap-2 p-3 bg-base-200 rounded-xl text-xs font-bold text-slate-500">
+                            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            Next: {{course.nextClass}}
+                        </div>
+
+                        <button (click)="unenroll(course.courseId)"
+                            class="btn btn-outline btn-error btn-block rounded-xl btn-sm">Unenroll</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
