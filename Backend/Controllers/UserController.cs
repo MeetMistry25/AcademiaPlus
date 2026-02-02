@@ -102,6 +102,22 @@ namespace Backend.Controllers
                 return BadRequest("Wrong password.");
             }
 
+            // Normalize roles for comparison
+            string dbRole = user.Role?.ToLower() ?? "user";
+            string requestedRole = request.Role.ToLower();
+
+            // Map 'student' request to 'user' db role if necessary, or vice versa
+            // Assuming default DB role for students is 'user'
+            if (requestedRole == "student" && dbRole != "user" && dbRole != "student")
+            {
+                return BadRequest("Invalid role for this user.");
+            }
+
+            if (requestedRole == "admin" && dbRole != "admin")
+            {
+                return BadRequest("User is not an admin.");
+            }
+
             string token = CreateToken(user);
 
             return Ok(token);

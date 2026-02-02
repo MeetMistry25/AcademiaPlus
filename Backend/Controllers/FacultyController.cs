@@ -164,6 +164,11 @@ namespace Backend.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login([FromBody] LoginDto request)
         {
+            if (request.Role.ToLower() != "faculty")
+            {
+                return BadRequest("Invalid role. Expected 'faculty'.");
+            }
+
             var faculty = await _context.Faculties.FirstOrDefaultAsync(f => f.Email == request.Email);
             if (faculty == null)
             {

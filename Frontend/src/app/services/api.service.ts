@@ -13,9 +13,8 @@ export class ApiService {
 
     login(credentials: LoginRequest, role: 'student' | 'faculty' | 'admin'): Observable<string> {
         const endpoint = role === 'faculty' ? 'Faculty/login' : 'User/login';
-        // The APIs return token as plain string or in a response object? 
-        // UserController returns Ok(token) which is a string. FacultyController too.
-        return this.http.post(`${this.apiUrl}/${endpoint}`, credentials, { responseType: 'text' });
+        const payload = { ...credentials, role };
+        return this.http.post(`${this.apiUrl}/${endpoint}`, payload, { responseType: 'text' });
     }
 
     register(data: RegisterRequest): Observable<any> {
