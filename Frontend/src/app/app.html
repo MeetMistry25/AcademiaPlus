@@ -8,11 +8,15 @@
     </main>
 
     <!-- Minimized Footer -->
-    <footer class="footer items-center p-6 bg-base-300 text-base-content border-t border-slate-200">
-        <aside class="items-center grid-flow-col">
-            <div class="p-1 px-2 bg-primary rounded text-white font-bold text-sm mr-2">A+</div>
-            <p>© 2026 Academia+  :  All courses are now free.</p>
-        </aside>
-        
+    <footer class="footer p-6 bg-base-300 text-base-content border-t border-slate-200">
+        <div class="flex flex-col md:flex-row justify-between w-full items-center">
+            <aside class="flex items-center gap-2">
+                <div class="p-1 px-2 bg-primary rounded text-white font-bold text-sm">A+</div>
+                <p class="font-medium">© 2026 Academia+ : All courses are now free.</p>
+            </aside>
+            <nav>
+                <a routerLink="/about" class="link link-hover font-medium">About Us</a>
+            </nav>
+        </div>
     </footer>
 </div>

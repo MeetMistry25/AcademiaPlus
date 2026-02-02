@@ -10,6 +10,7 @@ import { AdminPanel } from './components/admin-panel/admin-panel';
 import { Mylearning } from './components/mylearning/mylearning';
 import { Settings } from './components/settings/settings';
 import { Errorp } from './components/errorp/errorp';
+import { About } from './components/about/about';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -23,5 +24,6 @@ export const routes: Routes = [
     { path: 'admin', component: AdminPanel },
     {path:'mylearning', component:Mylearning},
     {path:'settings', component:Settings},
+    {path:'about' , component: About},
     {path:'**', component: Errorp}
 ];
